@@ -1,0 +1,135 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+.ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+*.out
+
+# Environment variables
+.env*
+.env.local
+.env.dev
+.env.test
+.env.prod
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# CLAUDE specific files that shouldn't be committed
+.claude/settings.local.json
+
+# Local configuration files
+*.local
+config.json
+secrets.json
+
+# History and spec files that may contain sensitive info
+history/
+specs/
+
+# Backup files
+*~
+*.bak
+*.tmp
+*.backup
+
+# Coverage reports
+.coverage*
+coverage.xml
+*.gcov
+*.lcov
+
+# Documentation builds
+_site/
+_sass/
+.jekyll-metadata
+.jekyll-cache/
+
+# Node.js (in case you add frontend later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+
+# Database files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Compiled binary files
+*.exe
+*.dll
+*.dylib
+*.so
+
+# Editor files
+*.swp
+*.swo
+*~
+*.tmp
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Mac
+.DS_Store
+.DS_Store?
+._*
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
