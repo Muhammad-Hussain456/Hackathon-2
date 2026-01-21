@@ -61,7 +61,7 @@ Thumbs.db
 htmlcov/
 
 # CLAUDE specific files that shouldn't be committed
-*.claude
+.claude
 
 # Local configuration files
 *.local
