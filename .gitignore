@@ -61,7 +61,7 @@ Thumbs.db
 htmlcov/
 
 # CLAUDE specific files that shouldn't be committed
-.claude/settings.local.json
+.claude/
 
 # Local configuration files
 *.local
@@ -69,8 +69,8 @@ config.json
 secrets.json
 
 # History and spec files that may contain sensitive info
-history/
-specs/
+# history/
+# specs/
 
 # Backup files
 *~
