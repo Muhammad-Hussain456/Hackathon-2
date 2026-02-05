@@ -131,10 +131,10 @@ const TasksPage: React.FC = () => {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading tasks...</p>
+          <p className="mt-4 text-gray-600">Loading your tasks...</p>
         </div>
       </div>
     );
@@ -145,52 +145,75 @@ const TasksPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
       <Head>
-        <title>Tasks - Todo Application</title>
+        <title>My Tasks - TodoPro</title>
         <meta name="description" content="Manage your todo tasks" />
       </Head>
 
       {/* Header */}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
-          <div className="flex items-center space-x-4">
-            <span className="text-gray-700">Welcome, {user.name}</span>
-            <button
-              onClick={logout}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-            >
-              Logout
-            </button>
+      <header className="bg-white shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
+              <p className="mt-2 text-gray-600">Manage your daily activities and boost productivity</p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-lg">
+                <span className="font-medium">Welcome, {user.name}</span>
+              </div>
+              <button
+                onClick={logout}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        {/* Action buttons */}
-        <div className="mb-6 flex justify-between items-center">
-          <div>
-            <h2 className="text-xl font-semibold text-gray-800">
-              Total: {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
-            </h2>
-            <p className="text-gray-600">
-              {tasks.filter(t => t.completed).length} completed
-            </p>
+      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        {/* Stats and Action buttons */}
+        <div className="mb-8 bg-white rounded-xl shadow-md p-6">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+            <div className="mb-4 md:mb-0">
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Total: {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
+              </h2>
+              <div className="flex space-x-6 mt-2">
+                <div className="flex items-center">
+                  <div className="h-3 w-3 rounded-full bg-green-500 mr-2"></div>
+                  <span className="text-gray-600">
+                    {tasks.filter(t => t.completed).length} completed
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-3 w-3 rounded-full bg-yellow-500 mr-2"></div>
+                  <span className="text-gray-600">
+                    {tasks.filter(t => !t.completed).length} pending
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setEditingTask(null);
+                setShowForm(true);
+              }}
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors transform hover:-translate-y-0.5"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="-ml-1 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Add New Task
+            </button>
           </div>
-          <button
-            onClick={() => {
-              setEditingTask(null);
-              setShowForm(true);
-            }}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Add New Task
-          </button>
         </div>
 
         {/* Task list */}
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <div className="bg-white shadow-lg rounded-xl overflow-hidden">
           {tasks.length > 0 ? (
             <TaskList
               tasks={tasks}
@@ -199,32 +222,37 @@ const TasksPage: React.FC = () => {
               onEdit={handleEditTask}
             />
           ) : (
-            <div className="text-center py-12">
-              <svg
-                className="mx-auto h-12 w-12 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  vectorEffect="non-scaling-stroke"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No tasks</h3>
-              <p className="mt-1 text-sm text-gray-500">Get started by creating a new task.</p>
+            <div className="text-center py-16">
+              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100">
+                <svg
+                  className="h-6 w-6 text-indigo-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    vectorEffect="non-scaling-stroke"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+              </div>
+              <h3 className="mt-4 text-lg font-medium text-gray-900">No tasks yet</h3>
+              <p className="mt-2 text-gray-500">Get started by creating a new task to organize your day.</p>
               <div className="mt-6">
                 <button
                   onClick={() => {
                     setEditingTask(null);
                     setShowForm(true);
                   }}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                 >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="-ml-1 mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
                   Create your first task
                 </button>
               </div>

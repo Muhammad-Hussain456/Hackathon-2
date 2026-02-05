@@ -41,16 +41,26 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSave, onCancel }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4 sm:p-6">
-      <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-auto">
-        <div className="p-4 sm:p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">
-            {task ? 'Edit Task' : 'Create New Task'}
-          </h3>
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4 sm:p-6 z-50">
+      <div className="relative bg-white rounded-xl shadow-2xl max-w-lg w-full mx-auto">
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-bold text-gray-900">
+              {task ? 'Edit Task' : 'Create New Task'}
+            </h3>
+            <button
+              onClick={onCancel}
+              className="text-gray-400 hover:text-gray-500 transition-colors"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
 
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                 Title *
               </label>
               <input
@@ -58,28 +68,28 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSave, onCancel }) => {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
-                placeholder="Task title"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
+                placeholder="Enter task title..."
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
                 Description
               </label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                rows={3}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
-                placeholder="Task description (optional)"
+                rows={4}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
+                placeholder="Enter task description..."
               />
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="dueDate" className="block text-sm font-medium text-gray-700 mb-1">
+            <div>
+              <label htmlFor="dueDate" className="block text-sm font-medium text-gray-700 mb-2">
                 Due Date
               </label>
               <input
@@ -87,21 +97,21 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSave, onCancel }) => {
                 id="dueDate"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
               />
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-3 gap-2">
+            <div className="flex flex-col sm:flex-row sm:justify-end sm:space-x-3 gap-3 pt-4">
               <button
                 type="button"
                 onClick={onCancel}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-6 py-3 border border-gray-300 text-sm font-medium rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 {task ? 'Update Task' : 'Create Task'}
               </button>
